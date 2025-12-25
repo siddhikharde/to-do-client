@@ -8,7 +8,7 @@ function App() {
   const [newTodo, setnewTodo] = useState("");
   const [oldTodo, setOldTodo] = useState("");
   const [editMode, setEditMode] = useState(false);
-const baseUrl="http://localhost:8000"
+const baseUrl="https://to-do-server-se06.onrender.com"
 
   const loadTodos = async () => {
     console.log("Loading todos...");
