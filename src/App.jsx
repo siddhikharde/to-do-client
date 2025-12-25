@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Trash, SquarePen } from 'lucide-react';
 
-
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setnewTodo] = useState("");
