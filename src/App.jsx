@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-
+import { Trash } from 'lucide-react';
 
 
 function App() {
@@ -19,6 +19,12 @@ const addTodo=async()=>{
   loadTodos();
   
 }
+const deleteTodo=async(todoItem)=>{
+  const response=await axios.delete("http://localhost:8000/todos",{
+    data: { todoItem },
+  });
+  loadTodos();
+}
   useEffect(()=>{
     loadTodos();
   },[]);
@@ -29,8 +35,9 @@ const addTodo=async()=>{
          {
           todos.map((todo, index)=>{
             return(
-              <div key={index} className='w-[90%] md:w-[70%] border-1 px-[20px] py-[15px] m-[10px] rounded-2xl text-2xl bg-[#94B4C1]'>
+              <div key={index} className='w-[90%] md:w-[70%] border-1 px-[20px] py-[15px] m-[10px] rounded-[10px] flex justify-between items-center text-[18px] bg-[#94B4C1]'>
               <p>{todo}</p>
+              <Trash onClick={() => deleteTodo(todo)} className='cursor-pointer text-red-700 '/>
             </div>
             )
           })
@@ -41,8 +48,8 @@ const addTodo=async()=>{
         <input type="text" placeholder='Add task' value={newTodo} onChange={(e)=>{
           setnewTodo(e.target.value);
         }} 
-        className='m-[20px] p-[10px] outline-none rounded-lg border-1 w-[60%] border-[#213448]' />
-        <button className='border rounded-2xl p-[10px] text-[#213448] font-bold' onClick={addTodo}>Add TODO</button>
+        className='m-[20px] p-[10px] outline-none rounded-lg border-1 w-[50%] md:w-[60%] border-[#213448]' />
+        <button className='border text-[14px] md:text-[16px] rounded-[8px] p-[10px] text-[#213448] font-bold' onClick={addTodo}>Add TODO</button>
         </div> 
 
      
