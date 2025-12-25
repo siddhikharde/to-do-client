@@ -8,27 +8,29 @@ function App() {
   const [newTodo, setnewTodo] = useState("");
   const [oldTodo, setOldTodo] = useState("");
   const [editMode, setEditMode] = useState(false);
+const baseUrl="http://localhost:8000"
+
   const loadTodos = async () => {
     console.log("Loading todos...");
-    const response = await axios.get("http://localhost:8000/todos");
+    const response = await axios.get(`${baseUrl}/todos`);
 
     setTodos(response.data.data);
   }
   const addTodo = async () => {
-    const response = await axios.post("http://localhost:8000/todos", { "todoItems": newTodo });
+    const response = await axios.post(`${baseUrl}/todos`, { "todoItems": newTodo });
     setnewTodo("");
     loadTodos();
 
   }
   const deleteTodo = async (todoItem) => {
-    const response = await axios.delete("http://localhost:8000/todos", {
+    const response = await axios.delete(`${baseUrl}/todos`, {
       data: { todoItem },
     });
     loadTodos();
   }
 
   const editTodo = async () => {
-    const response = await axios.put("http://localhost:8000/todos", {
+    const response = await axios.put(`${baseUrl}/todos`, {
       "newTodoItem": newTodo,
       "oldTodoItem": oldTodo
 
@@ -52,15 +54,15 @@ function App() {
               <div key={index} className='w-[90%] md:w-[70%] border-1 px-[20px] py-[15px] m-[10px] rounded-[10px] flex justify-between items-center text-[18px] bg-[#94B4C1]'>
                 <p>{todo}</p>
                 <div className='flex gap-2 items-center '
-                  onClick={() => {
+                 >
+                  <SquarePen className='h-[25px] cursor-pointer'  onClick={() => {
                     setEditMode(true);
                     setOldTodo(todo);
                     setnewTodo(todo);
                   }
 
-                  }>
-                  <SquarePen className='h-[20px] cursor-pointer' />
-                  <Trash onClick={() => deleteTodo(todo)} className='cursor-pointerh-[10px]  text-red-700 ' /></div>
+                  } />
+                  <Trash onClick={() => deleteTodo(todo)} className='cursor-pointer h-[25px]  text-red-700 ' /></div>
               </div>
             )
           })
