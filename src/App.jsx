@@ -8,7 +8,7 @@ function App() {
   const [newTodo, setnewTodo] = useState("");
   const [oldTodo, setOldTodo] = useState("");
   const [editMode, setEditMode] = useState(false);
-const baseUrl="https://to-do-server-se06.onrender.com"
+const baseUrl=import.meta.env.VITE_BASE_URL;
 
   const loadTodos = async () => {
     console.log("Loading todos...");
